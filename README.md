@@ -34,7 +34,7 @@ Self-hosted DNS server powered by Technitium on Ubuntu Server 24.04 featuring ad
 
 #### Install Technitium
 
-1. Open **Technitium DNS** VM and wait for initial installation to finish.
+1. Open **TechnitiumDNS** VM and wait for initial installation to finish.
 2. Reboot by running the command `reboot` and then log back in as the user **dns**. Update and upgrade packages using `sudo apt update & sudo apt upgrade -y`. Make sure to run this command periodically to stay up to date.
 
 <img width="1282" height="882" alt="Update and upgrade packages" src="https://github.com/user-attachments/assets/adac03a9-60ba-4f95-b747-bfb5b7b050a1" />
