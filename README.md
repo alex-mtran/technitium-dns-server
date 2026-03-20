@@ -1,6 +1,6 @@
 # Technitium DNS Server
 
-Self-hosted DNS server powered by Technitium on Ubuntu Server 24.04 featuring ad blocking, custom DNS records, DoH/DoT support, and full local network control.
+Self-hosted DNS server powered by Technitium on Ubuntu Desktop 24.04 featuring ad blocking, custom DNS records, DoH/DoT support, and full local network control.
 
 #### Required Software
 * Ubuntu Desktop 24.04 LTS
