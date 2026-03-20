@@ -3,11 +3,11 @@
 Self-hosted DNS server powered by Technitium on Ubuntu Server 24.04 featuring ad blocking, custom DNS records, DoH/DoT support, and full local network control.
 
 #### Required Software
-* Ubuntu Server 24.04
+* Ubuntu Desktop 24.04 LTS
 * Oracle VirtualBox
 * Technitium Linux
 
-### Set up Ubuntu Desktop 24.04 Virtual Machine
+### Set up Ubuntu Desktop 24.04.4 Virtual Machine
 
 1. <a href="https://ubuntu.com/download/desktop">Download Ubuntu Desktop 24.04.4 LTS</a>.
 2. <a href="https://www.virtualbox.org/wiki/Downloads">Download Oracle VirtualBox</a>.
@@ -16,7 +16,7 @@ Self-hosted DNS server powered by Technitium on Ubuntu Server 24.04 featuring ad
 
     **Virtual Name and OS**
 
-<img width="926" height="749" alt="Virtual machine name and operating system" src="https://github.com/user-attachments/assets/bbeb0690-d03c-4617-af10-baf64aa045e7" />
+<img width="924" height="746" alt="Virtual machine name and operating system" src="https://github.com/user-attachments/assets/89f84ed8-38ce-46ee-82f1-82bc7fed703a" />
 
     **Credentials**
 
@@ -28,23 +28,47 @@ Self-hosted DNS server powered by Technitium on Ubuntu Server 24.04 featuring ad
 
     **Virtual Hard Disk**
 
-<img width="926" height="743" alt="Virtual Hard Disk" src="https://github.com/user-attachments/assets/bcaf6555-6f3d-4b4b-9e36-8edefd734947" />
+<img width="922" height="743" alt="Virtual hard disk" src="https://github.com/user-attachments/assets/d2bc88d8-b391-4a30-ade9-0b9617abbf3f" />
 
 5. Click **Finish**.
 
 #### Configure Server VM Settings
 
-1. Open **Technitium DNS** server VM and wait for initial installation to finish.
-2. Update and upgrade packages using `sudo apt update & sudo apt upgrade -y`. Make sure to run this command periodically to stay up to date.
+1. Open **Technitium DNS** VM and wait for initial installation to finish.
+2. Reboot by running the command `reboot` and then log back in as the user **dns**. Update and upgrade packages using `sudo apt update & sudo apt upgrade -y`. Make sure to run this command periodically to stay up to date.
+
+<img width="1282" height="882" alt="Update and upgrade packages" src="https://github.com/user-attachments/assets/adac03a9-60ba-4f95-b747-bfb5b7b050a1" />
+
 3. Run the **Technitium DNS Server** installer script via the command `curl -sSL https://download.technitium.com/dns/install.sh | sudo bash`.
 
-<img width="1279" height="882" alt="Technitium successfully installed" src="https://github.com/user-attachments/assets/62382c25-ef6c-47cb-8078-79ff49ce8240" />
+<img width="1274" height="882" alt="Technitium successfully installed" src="https://github.com/user-attachments/assets/bf728f8b-b768-45a9-a48d-1c51a11d3dd8" />
 
-4. Type `sudo nano /etc/netplan/` and tab complete to write to the machine's config.yaml file. Run the completed command to write into the file.
+> **Note:** `curl` is needed to install using the above command. Install **curl** via `sudo apt install curl`.
 
-<img width="1278" height="889" alt="/etc/netplan" src="https://github.com/user-attachments/assets/465e6f8b-174f-4abf-90d7-0eaeb1d35d68" />
+4. Open up **Mozilla Firefox** and search for the Technitium web console by searching up the domain **localhost:5380**. Enter new password and sign in.
 
-<img width="1280" height="882" alt="Initial config.yaml file" src="https://github.com/user-attachments/assets/1e7510cc-3163-4e24-8da5-0b7e9a164a57" />
+<img width="1275" height="882" alt="Change technitium web console password" src="https://github.com/user-attachments/assets/d88c9c87-2577-4be6-8489-a820230e4d7b" />
 
-5. Change config.yaml contents to match the image below. Hit **Ctrl + X > Y > Enter** to save contents.
+5. Run `sudo nano /etc/netplan/99-dns-override.yaml` command and write into the file to override the dns for this machine. Hit **Ctrl + X > Y > Enter** to save file contents and exit.
 
+<img width="1278" height="885" alt="99-dns-override.yaml file contents" src="https://github.com/user-attachments/assets/340c25dc-24f9-4013-af4e-5173d3baf0d5" />
+
+> **Note:** Here it is industry standard to create a separate override file to follow the principle of not modifying files that we don't own. Thus we create a new file to override the DNS rather than modifying the 01 network manager file or the 50 cloud-init file.
+
+6. Run `sudo netplan apply` to apply netplan changes.
+
+<img width="1276" height="881" alt="sudo netplan apply warnings" src="https://github.com/user-attachments/assets/68580af2-57be-49ac-9df3-ed1d437eb8ef" />
+
+> **Note:** The following are commands to fix cosmetic warnings:
+>
+> `sudo chmod 600 /etc/netplan/99-dns-override.yaml` and `sudo chmod 600 /etc/netplan/01-network-manager-all.yaml` and then `sudo netplan apply` again to change permission warnings.
+>
+> `sudo nano /etc/hosts` > Add in this line **127.0.0.1 TechnitiumDNS** to resolve the hostname **TechnitiumDNS** locally. This also means you can search **technitiumdns:5380** as well as **localhost:5380** to access the technitium web console.
+>
+> <img width="1189" height="406" alt="Apply cosmetic warning fixes" src="https://github.com/user-attachments/assets/b46d9e49-70f5-4b4e-9768-67235c86e993" />
+>
+> <img width="1275" height="881" alt="Verify changes" src="https://github.com/user-attachments/assets/81818fcf-6a91-404e-a727-2a5460461183" />
+>
+> <img width="1276" height="880" alt="/etc/hosts" src="https://github.com/user-attachments/assets/6cac7742-cd1d-499b-a8d1-b04adc39d04e" />
+>
+> <img width="1277" height="879" alt="Verify machine nameserver" src="https://github.com/user-attachments/assets/1acec34b-7e36-452b-885e-41a2d427a880" />
