@@ -67,9 +67,11 @@ Self-hosted DNS server powered by Technitium on Ubuntu Server 24.04 featuring ad
 >
 > <img width="1189" height="406" alt="Apply cosmetic warning fixes" src="https://github.com/user-attachments/assets/b46d9e49-70f5-4b4e-9768-67235c86e993" />
 >
-> <img width="1275" height="881" alt="Verify changes" src="https://github.com/user-attachments/assets/81818fcf-6a91-404e-a727-2a5460461183" />
->
 > <img width="1276" height="880" alt="/etc/hosts" src="https://github.com/user-attachments/assets/6cac7742-cd1d-499b-a8d1-b04adc39d04e" />
+>
+> **Note:** Verify changes with `nslookup google.com` and `ping TechnitiumDNS`. `nslookup google.com` should yield a nameserver of `127.0.0.1` and `ping TechnitiumDNS` should receive pings properly. Alternatively similar to `nslookup google.com`, run command `cat /etc/resolv.conf` to verify a nameserver of `127.0.0.1`. `127.0.0.1` is the universal IP of the local machine itself.
+> 
+> <img width="1275" height="881" alt="Verify changes" src="https://github.com/user-attachments/assets/81818fcf-6a91-404e-a727-2a5460461183" />
 >
 > <img width="1277" height="879" alt="Verify machine nameserver" src="https://github.com/user-attachments/assets/1acec34b-7e36-452b-885e-41a2d427a880" />
 
@@ -83,7 +85,7 @@ Self-hosted DNS server powered by Technitium on Ubuntu Server 24.04 featuring ad
 
 > **Note:** DNS TTL (time to live) is a setting that tells the DNS resolver how long to cache a query before requesting a new one. To learn more read <a href="https://www.varonis.com/blog/dns-ttl">this blogpost on dns ttl</a>. We set the TTL to a relatively short 600 seconds (10 minutes) to account for changing IPs of ad websites.
 
-3. Click the **Settings** tab > **Blocking** and scroll down to **Allow/Block List URLs**. Here you can add custom lists or use the **Quick Add** feature underneath to quickly add updated lists. My setup will only use the default by StevenBlack, however, further research should be done to determine the best blocklists to use for your use case.
+3. Click the **Settings** tab > **Blocking** and scroll down to **Allow/Block List URLs**. Here you can add custom lists or use the **Quick Add** feature underneath to quickly add updated lists. My setup will use the **Steven Black [adware + malware]**, **OISD Big [Domains (Wildcards)]**, and **Hagezi [Multi PRO++-Maximum protection]**, however, further research should be done to determine the best blocklists to use for your use case.
 
 <img width="1278" height="882" alt="Add block lists" src="https://github.com/user-attachments/assets/3559c67f-61a3-4f4e-a129-42c170e83596" />
 
