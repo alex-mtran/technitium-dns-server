@@ -10,6 +10,9 @@ Self-hosted DNS server powered by Technitium on Ubuntu Desktop 24.04 featuring a
 ### Set up Ubuntu Desktop 24.04.4 Virtual Machine
 
 1. <a href="https://ubuntu.com/download/desktop">Download Ubuntu Desktop 24.04.4 LTS</a>.
+
+> **Note:** This download version is the one I used for my Windows host machine for the x86_64 architecture. Make sure to download the proper version for your host machine's architecture (ARM64 for macOS : <a href="https://cdimage.ubuntu.com/releases/24.04/release/">Noble Numbat</a>).
+
 2. <a href="https://www.virtualbox.org/wiki/Downloads">Download Oracle VirtualBox</a>.
 3. Open **Oracle VirtualBox** and press **New** to add a new virtual machine to the manager.
 4. Fill in:
